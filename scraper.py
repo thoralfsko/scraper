@@ -83,7 +83,10 @@ def get_line_score(game):
     return stats
 
 def get_four_factors(game):
-    ''''''
+    '''get_four_factors(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    returns: list of two four factor rows => [[id, team, pace, efg%, tov%, orb%, ft/fga, ortg], [id, team, pace, efg%, tov%, orb%, ft/fga, ortg]]'''
 
     #create the url
     url = 'https://www.basketball-reference.com' + game
