@@ -133,9 +133,80 @@ def get_four_factors(game):
 
     return stats
 
+def get_basic_box(game):
+    ''''''
+
+    #create the url
+    url = 'https://www.basketball-reference.com' + game
+
+    #make request
+    page = requests.get(url)
+
+    #find teams for soup.find
+    #create soup
+    soup = bs(page.content, 'html.parser')
+    comments = soup.find_all(string=lambda text: isinstance(text, Comment))
+
+    #find the table in the comments
+    for comment in (comment for comment in comments if len(comment) > 2):
+        ins = bs(comment, 'html.parser')
+        table = ins.find(id='four_factors')
+        if table != None:
+            soup = table
+
+    #find game id
+    gid = game.split('/')[2].split('.')[0]
+
+    #get team names for id
+    stats = []
+    body = soup.tbody
+    teams = body.find_all('a')
+    teams = [team.get_text() for team in teams]
+
+    #create div id to search for
+    ids = ['box-' + team + '-game-basic' for team in teams]
+
+    #create soup
+    soup = bs(page.content, 'html.parser')
+
+    #for each team find pasic box score rows
+    for id in ids:
+        #find the id
+        soup.find(id=id)
+        body = soup.tbody
+        trs = body.find_all('tr')
+        row = []
+
+        #add id to the row
+        row.append(gid)
+
+        for tr in trs:
+            #find player name
+            player = tr.find_all('th')[0].get_text()
+            row.append(player)
+
+            #find the players stats
+            tds = tr.find_all('td')
+            for td in tds:
+                row.append(td.get_text())
+
+            break
+
+        print(row)
+        break
+
+
+
+    return []
+
 #########
 ##TESTS##
 #########
+def test_empty_get_basic_box():
+    #get the result
+    result = get_basic_box('/boxscores/202012230BOS.html')
+    assert [] != result
+
 def test_contents_get_four_factors():
     #get the results
     result = get_four_factors('/boxscores/202012230BOS.html')
