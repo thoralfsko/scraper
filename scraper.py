@@ -171,18 +171,11 @@ def get_basic_box(game):
 
     #for each team find pasic box score rows
     for id in ids:
+        #find the table
         table = s.find('table', id=id)
         body = table.tbody
-        print(body)
-        print('#############################################')
 
-    '''
-    #for each team find pasic box score rows
-    for id in ids:
-        #find the id
-        print(id)
-        soup.find(id=id)
-        body = soup.tbody
+        #find table rows
         trs = body.find_all('tr')
 
         for tr in trs:
@@ -199,13 +192,8 @@ def get_basic_box(game):
                 row.append(td.get_text())
 
             stats.append(row)
-        #print(stats)
-        #print()
 
-    print(stats)
-    '''
-
-    return []
+    return stats
 
 #########
 ##TESTS##
