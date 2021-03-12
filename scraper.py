@@ -134,7 +134,10 @@ def get_four_factors(game):
     return stats
 
 def get_basic_box(game):
-    ''''''
+    '''get_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    returns: list of basic box score rows => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
 
     #create the url
     url = 'https://www.basketball-reference.com' + game
