@@ -167,20 +167,28 @@ def get_basic_box(game):
     ids = ['box-' + team + '-game-basic' for team in teams]
 
     #create soup
-    soup = bs(page.content, 'html.parser')
+    s = bs(page.content, 'html.parser')
 
     #for each team find pasic box score rows
     for id in ids:
+        table = s.find('table', id=id)
+        body = table.tbody
+        print(body)
+        print('#############################################')
+
+    '''
+    #for each team find pasic box score rows
+    for id in ids:
         #find the id
+        print(id)
         soup.find(id=id)
         body = soup.tbody
         trs = body.find_all('tr')
-        row = []
-
-        #add id to the row
-        row.append(gid)
 
         for tr in trs:
+            row = []
+            #add id to the row
+            row.append(gid)
             #find player name
             player = tr.find_all('th')[0].get_text()
             row.append(player)
@@ -190,12 +198,12 @@ def get_basic_box(game):
             for td in tds:
                 row.append(td.get_text())
 
-            break
+            stats.append(row)
+        #print(stats)
+        #print()
 
-        print(row)
-        break
-
-
+    print(stats)
+    '''
 
     return []
 
