@@ -170,7 +170,7 @@ def get_basic_box(game):
     s = bs(page.content, 'html.parser')
 
     #for each team find pasic box score rows
-    for id in ids:
+    for i,id in enumerate(ids):
         #find the table
         table = s.find('table', id=id)
         body = table.tbody
@@ -179,10 +179,16 @@ def get_basic_box(game):
         trs = body.find_all('tr')
 
         for tr in trs:
+            #will hold this rows data
             row = []
+
             #add id to the row
             row.append(gid)
-            #find player name
+
+            #find team and add it to row
+            row.append(teams[i])
+
+            #find player name and add it to row
             player = tr.find_all('th')[0].get_text()
             row.append(player)
 
