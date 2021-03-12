@@ -193,6 +193,9 @@ def get_basic_box(game):
 
             #find player name and add it to row
             player = tr.find_all('th')[0].get_text()
+            #check that it is not a bogus row
+            if player == 'Reserves':
+                continue
             row.append(player)
 
             #find the players stats
@@ -207,6 +210,25 @@ def get_basic_box(game):
 #########
 ##TESTS##
 #########
+def test_contents_get_basic_box():
+    #get the results
+    results = get_basic_box('/boxscores/202012230BOS.html')
+    #create names list
+    names = ['Jrue Holiday', 'Khris Middleton', 'Giannis Antetokounmpo', 'Brook Lopez', 'Donte DiVincenzo', 'Pat Connaughton',
+        'Bobby Portis', 'Bryn Forbes', 'D.J. Wilson', 'Sam Merrill', 'Jaylen Adams', 'Thanasis Antetokounmpo',
+        'Jordan Nwora', 'Mamadi Diakite', 'Torrey Craig', 'Marcus Smart', 'Jaylen Brown', 'Jayson Tatum', 'Daniel Theis',
+        'Tristan Thompson', 'Jeff Teague', 'Semi Ojeleye', 'Grant Williams', 'Payton Pritchard', 'Robert Williams',
+        'Carsen Edwards', 'Javonte Green', 'Aaron Nesmith', 'Tremont Waters']
+    #create player rows to test
+    
+
+    #test players col
+    for i,row in enumerate(results):
+        assert row[2] == names[i]
+
+    #test first player for each team
+    #test last player for each team
+
 def test_empty_get_basic_box():
     #get the result
     result = get_basic_box('/boxscores/202012230BOS.html')
