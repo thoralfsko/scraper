@@ -220,14 +220,20 @@ def test_contents_get_basic_box():
         'Tristan Thompson', 'Jeff Teague', 'Semi Ojeleye', 'Grant Williams', 'Payton Pritchard', 'Robert Williams',
         'Carsen Edwards', 'Javonte Green', 'Aaron Nesmith', 'Tremont Waters']
     #create player rows to test
-    
+    rows = [['202012230BOS', 'MIL', 'Jrue Holiday', '38:23', '10', '16', '.625', '1', '4', '.250', '4', '4', '1.000', '2', '4', '6', '3', '2', '1', '3', '3', '25', '-5'],
+        ['202012230BOS', 'MIL', 'Torrey Craig', 'Did Not Play'],
+        ['202012230BOS', 'BOS', 'Marcus Smart', '38:27', '0', '3', '.000', '0', '2', '.000', '3', '4', '.750', '0', '1', '1', '7', '0', '2', '2', '2', '3', '0'],
+        ['202012230BOS', 'BOS', 'Tremont Waters', 'Did Not Play']]
 
     #test players col
     for i,row in enumerate(results):
         assert row[2] == names[i]
 
-    #test first player for each team
-    #test last player for each team
+    #test rows
+    assert results[0] == rows[0]
+    assert results[14] == rows[1]
+    assert results[15] == rows[2]
+    assert results[28] == rows[3]
 
 def test_empty_get_basic_box():
     #get the result
