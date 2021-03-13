@@ -141,9 +141,19 @@ def get_basic_box(game):
 
     #create the url
     url = 'https://www.basketball-reference.com' + game
-
     #make request
     page = requests.get(url)
+
+    #get the gid, ids and teams
+    gid, teams = get_team_info(game, page)
+
+    #create ids for searching the page
+    ids = ['box-' + team + '-game-basic' for team in teams]
+
+    return get_basic_table(page, gid, ids, teams)
+
+def get_team_info(game, page):
+    ''''''
 
     #find teams for soup.find
     #create soup
@@ -157,17 +167,20 @@ def get_basic_box(game):
         if table != None:
             soup = table
 
-    #find game id
+    #find game id(gid)
     gid = game.split('/')[2].split('.')[0]
 
-    #get team names for id
-    stats = []
+    #find teams
     body = soup.tbody
     teams = body.find_all('a')
     teams = [team.get_text() for team in teams]
 
-    #create div id to search for
-    ids = ['box-' + team + '-game-basic' for team in teams]
+    return gid, teams
+
+def get_basic_table(page, gid, ids, teams):
+    ''''''
+
+    stats = []
 
     #create soup
     s = bs(page.content, 'html.parser')
