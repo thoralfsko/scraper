@@ -144,7 +144,7 @@ def get_basic_box(game):
     #make request
     page = requests.get(url)
 
-    #get the gid, ids and teams
+    #get the gid and teams
     gid, teams = get_team_info(game, page)
 
     #create ids for searching the page
@@ -180,6 +180,7 @@ def get_team_info(game, page):
 def get_basic_table(page, gid, ids, teams):
     ''''''
 
+    #list of rows
     stats = []
 
     #create soup
@@ -220,9 +221,31 @@ def get_basic_table(page, gid, ids, teams):
 
     return stats
 
+def get_basic_box_q1(game):
+    ''''''
+
+    #create the url
+    url = 'https://www.basketball-reference.com' + game
+    #make request
+    page = requests.get(url)
+
+    #get the gid and teams
+    gid, teams = get_team_info(game, page)
+
+    #create ids for searching the page
+    ids = ['box-' + team + '-q1-basic' for team in teams]
+    print(get_basic_table(page, gid, ids, teams))
+
+    return []
+
 #########
 ##TESTS##
 #########
+def test_empty_get_basic_box_q1():
+    #get the results
+    results = get_basic_box_q1('/boxscores/202012230BOS.html')
+    assert results != []
+
 def test_contents_get_basic_box():
     #get the results
     results = get_basic_box('/boxscores/202012230BOS.html')
