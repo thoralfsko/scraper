@@ -247,13 +247,120 @@ def get_basic_box_q1(game):
 
     #create ids for searching the page
     ids = ['box-' + team + '-q1-basic' for team in teams]
-    print(get_basic_table(page, gid, ids, teams))
+    #print(get_basic_table(page, gid, ids, teams))
 
-    return []
+    return get_basic_table(page, gid, ids, teams)
 
+def get_basic_box_q2(game):
+    '''get_basic_box_q2(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    returns: list of basic box score rows for q1 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+
+    #create the url
+    url = 'https://www.basketball-reference.com' + game
+    #make request
+    page = requests.get(url)
+
+    #get the gid and teams
+    gid, teams = get_team_info(game, page)
+
+    #create ids for searching the page
+    ids = ['box-' + team + '-q2-basic' for team in teams]
+    #print(get_basic_table(page, gid, ids, teams))
+
+    return get_basic_table(page, gid, ids, teams)
+
+def get_basic_box_q3(game):
+    '''get_basic_box_q3(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    returns: list of basic box score rows for q1 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+
+    #create the url
+    url = 'https://www.basketball-reference.com' + game
+    #make request
+    page = requests.get(url)
+
+    #get the gid and teams
+    gid, teams = get_team_info(game, page)
+
+    #create ids for searching the page
+    ids = ['box-' + team + '-q3-basic' for team in teams]
+    #print(get_basic_table(page, gid, ids, teams))
+
+    return get_basic_table(page, gid, ids, teams)
+
+def get_basic_box_q4(game):
+    '''get_basic_box_q4(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    returns: list of basic box score rows for q1 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+
+    #create the url
+    url = 'https://www.basketball-reference.com' + game
+    #make request
+    page = requests.get(url)
+
+    #get the gid and teams
+    gid, teams = get_team_info(game, page)
+
+    #create ids for searching the page
+    ids = ['box-' + team + '-q4-basic' for team in teams]
+    #print(get_basic_table(page, gid, ids, teams))
+
+    return get_basic_table(page, gid, ids, teams)
 #########
 ##TESTS##
 #########
+def test_contents_get_basic_box_q4():
+    #get the results
+    results = get_basic_box_q4('/boxscores/202012230BOS.html')
+
+    assert results[3][9] == ''
+    assert len(results[6]) == 4
+    assert results[20][2] == 'Jeff Teague'
+
+def test_empty_get_basic_box_q4():
+    #get the results
+    results = get_basic_box_q4('/boxscores/202012230BOS.html')
+    assert results != []
+
+def test_contents_get_basic_box_q3():
+    #get the results
+    results = get_basic_box_q3('/boxscores/202012230BOS.html')
+
+    assert results[2][22] == '-8'
+    assert results[19][5] == '3'
+    assert results[27][3] == 'Did Not Play'
+
+def test_empty_get_basic_box_q3():
+    #get the results
+    results = get_basic_box_q3('/boxscores/202012230BOS.html')
+    assert results != []
+
+def test_contents_get_basic_box_q2():
+    #get the results
+    results = get_basic_box_q2('/boxscores/202012230BOS.html')
+
+    assert results[1][2] == 'Khris Middleton'
+    assert results[13][2] == 'Mamadi Diakite'
+    assert results[16][6] == '.667'
+
+def test_empty_get_basic_box_q2():
+    #get the results
+    results = get_basic_box_q2('/boxscores/202012230BOS.html')
+    assert results != []
+
+def test_contents_get_basic_box_q1():
+    #get the results
+    results = get_basic_box_q1('/boxscores/202012230BOS.html')
+
+    assert results[0][22] == '+9'
+    assert results[6][2] == 'Bobby Portis'
+    assert results[15][3] == '9:58'
+    assert results[28][3] == 'Did Not Play'
+
 def test_empty_get_basic_box_q1():
     #get the results
     results = get_basic_box_q1('/boxscores/202012230BOS.html')
