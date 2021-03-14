@@ -255,7 +255,7 @@ def get_basic_box_q2(game):
     '''get_basic_box_q2(game)
         game: url extention. game == "/boxscores/202012230BOS.html"
 
-    returns: list of basic box score rows for q1 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+    returns: list of basic box score rows for q2 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
 
     #create the url
     url = 'https://www.basketball-reference.com' + game
@@ -275,7 +275,7 @@ def get_basic_box_q3(game):
     '''get_basic_box_q3(game)
         game: url extention. game == "/boxscores/202012230BOS.html"
 
-    returns: list of basic box score rows for q1 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+    returns: list of basic box score rows for q3 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
 
     #create the url
     url = 'https://www.basketball-reference.com' + game
@@ -295,7 +295,7 @@ def get_basic_box_q4(game):
     '''get_basic_box_q4(game)
         game: url extention. game == "/boxscores/202012230BOS.html"
 
-    returns: list of basic box score rows for q1 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+    returns: list of basic box score rows for q4 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
 
     #create the url
     url = 'https://www.basketball-reference.com' + game
@@ -310,9 +310,75 @@ def get_basic_box_q4(game):
     #print(get_basic_table(page, gid, ids, teams))
 
     return get_basic_table(page, gid, ids, teams)
+
+def get_basic_box_h1(game):
+    '''get_basic_box_h1(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    returns: list of basic box score rows for h1 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+
+    #create the url
+    url = 'https://www.basketball-reference.com' + game
+    #make request
+    page = requests.get(url)
+
+    #get the gid and teams
+    gid, teams = get_team_info(game, page)
+
+    #create ids for searching the page
+    ids = ['box-' + team + '-h1-basic' for team in teams]
+    #print(get_basic_table(page, gid, ids, teams))
+
+    return get_basic_table(page, gid, ids, teams)
+
+def get_basic_box_h2(game):
+    '''get_basic_box_h2(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    returns: list of basic box score rows for h2 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+
+    #create the url
+    url = 'https://www.basketball-reference.com' + game
+    #make request
+    page = requests.get(url)
+
+    #get the gid and teams
+    gid, teams = get_team_info(game, page)
+
+    #create ids for searching the page
+    ids = ['box-' + team + '-h2-basic' for team in teams]
+    #print(get_basic_table(page, gid, ids, teams))
+
+    return get_basic_table(page, gid, ids, teams)
 #########
 ##TESTS##
 #########
+def test_contents_get_basic_box_h2():
+    #get the results
+    results = get_basic_box_h2('/boxscores/202012230BOS.html')
+
+    assert len(results[12]) == 4
+    assert results[17][3] == '18:42'
+    assert results[20][22] == '-2'
+
+def test_empty_get_basic_box_h2():
+    #get the results
+    results = get_basic_box_h2('/boxscores/202012230BOS.html')
+    assert results != []
+
+def test_contents_get_basic_box_h1():
+    #get the results
+    results = get_basic_box_h1('/boxscores/202012230BOS.html')
+
+    assert results[0][22] == '-5'
+    assert results[3][2] == 'Brook Lopez'
+    assert len(results[25]) == 4
+
+def test_empty_get_basic_box_h1():
+    #get the results
+    results = get_basic_box_h1('/boxscores/202012230BOS.html')
+    assert results != []
+
 def test_contents_get_basic_box_q4():
     #get the results
     results = get_basic_box_q4('/boxscores/202012230BOS.html')
