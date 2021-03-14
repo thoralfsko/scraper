@@ -137,7 +137,7 @@ def get_basic_box(game):
     '''get_basic_box(game)
         game: url extention. game == "/boxscores/202012230BOS.html"
 
-    returns: list of basic box score rows => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+    returns: list of basic box score rows for the whole game => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
 
     #create the url
     url = 'https://www.basketball-reference.com' + game
@@ -153,7 +153,11 @@ def get_basic_box(game):
     return get_basic_table(page, gid, ids, teams)
 
 def get_team_info(game, page):
-    ''''''
+    '''get_team_info(game, page)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+        page: html source of the webpage
+
+    returns: gid(game id. a unique id for that game), teams(a list of the two teams that played the game)'''
 
     #find teams for soup.find
     #create soup
@@ -178,7 +182,13 @@ def get_team_info(game, page):
     return gid, teams
 
 def get_basic_table(page, gid, ids, teams):
-    ''''''
+    '''get_basic_table(page, gid, ids, teams)
+        page: html source of the webpage
+        gid: game id. a unique id for that game
+        ids: a list of ids to find table elements for the specific game
+        teams: a list of the two teams that played the game
+
+    returns: list of basic box score rows => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
 
     #list of rows
     stats = []
@@ -222,7 +232,10 @@ def get_basic_table(page, gid, ids, teams):
     return stats
 
 def get_basic_box_q1(game):
-    ''''''
+    '''get_basic_box_q1(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    returns: list of basic box score rows for q1 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
 
     #create the url
     url = 'https://www.basketball-reference.com' + game
