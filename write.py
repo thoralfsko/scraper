@@ -58,7 +58,7 @@ def clean_directory():
 
     side effect: deletes the data directory and its contents and creates the data
         directory again'''
-    
+
     #remove directory and its files if it exists
     if os.path.isdir(path):
         shutil.rmtree(path)
@@ -66,6 +66,35 @@ def clean_directory():
     #create the directory
     create_directory()
 
+def write_four_factors(game):
+    ''''''
+
+    #filename
+    filename = 'fourfactors.csv'
+
+    #labels
+    labels = 'id,team,pace,efg%,tov%,orb%,ft/fga,ortg'
+
+    #open the file
+    file = open(path + filename, 'a+')
+
+    #add labels if the file is empty
+    if os.path.getsize(path + filename) == 0:
+        file.write(labels)
+
+    #get the data for the game
+    data = get_four_factors(game)
+
+    #append the rows
+    for row in data:
+        rs = '' #rowstring
+        for col in row:
+            rs = rs + col + ','
+
+        file.write(rs[0:len(rs) - 1] + '\n')
+
+    #close the file
+    file.close()
 #########
 ##TESTS##
 #########
@@ -89,6 +118,8 @@ def test_clean_directory():
 #######################
 ##add new tests below##
 #######################
+def test_write_four_factors():
+    pass
 
 #@pytest.mark.line
 def test_write_line_score():
