@@ -67,13 +67,16 @@ def clean_directory():
     create_directory()
 
 def write_four_factors(game):
-    ''''''
+    '''write_four_factors(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes four factors data to "data/fourfactors.csv"'''
 
     #filename
     filename = 'fourfactors.csv'
 
     #labels
-    labels = 'id,team,pace,efg%,tov%,orb%,ft/fga,ortg'
+    labels = 'id,team,pace,efg%,tov%,orb%,ft/fga,ortg\n'
 
     #open the file
     file = open(path + filename, 'a+')
@@ -119,7 +122,18 @@ def test_clean_directory():
 ##add new tests below##
 #######################
 def test_write_four_factors():
-    pass
+    #clear the file if it exists
+    if os.path.isfile(path + 'fourfactors.csv'):
+        os.remove(path + 'fourfactors.csv')
+
+    #write file then read it
+    write_four_factors('/boxscores/202012230BOS.html')
+    table = pd.read_csv(path + 'fourfactors.csv')
+
+    assert len(table['id']) == 2
+    assert table['id'][1] == '202012230BOS'
+    assert table['pace'][0] == 99.9
+    assert table['ortg'][1] == 122.1
 
 #@pytest.mark.line
 def test_write_line_score():
