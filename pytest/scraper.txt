@@ -1,0 +1,29 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.5, pytest-6.2.2, py-1.10.0, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/tim/Documents/scraper
+plugins: anyio-2.0.2
+collecting ... collected 20 items
+
+scraper.py::test_contents_get_basic_box_h2 PASSED
+scraper.py::test_empty_get_basic_box_h2 PASSED
+scraper.py::test_contents_get_basic_box_h1 PASSED
+scraper.py::test_empty_get_basic_box_h1 PASSED
+scraper.py::test_contents_get_basic_box_q4 PASSED
+scraper.py::test_empty_get_basic_box_q4 PASSED
+scraper.py::test_contents_get_basic_box_q3 PASSED
+scraper.py::test_empty_get_basic_box_q3 PASSED
+scraper.py::test_contents_get_basic_box_q2 PASSED
+scraper.py::test_empty_get_basic_box_q2 PASSED
+scraper.py::test_contents_get_basic_box_q1 PASSED
+scraper.py::test_empty_get_basic_box_q1 PASSED
+scraper.py::test_contents_get_basic_box PASSED
+scraper.py::test_empty_get_basic_box PASSED
+scraper.py::test_contents_get_four_factors PASSED
+scraper.py::test_empty_get_four_factors PASSED
+scraper.py::test_contents_line_score PASSED
+scraper.py::test_empty_get_line_score PASSED
+scraper.py::test_empty_get_game_links PASSED
+scraper.py::test_contents_get_game_links PASSED
+
+============================= 20 passed in 14.20s ==============================
