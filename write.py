@@ -109,9 +109,9 @@ def write_basic_box(game):
     filename = 'basicbox.csv'
 
     #write to the file
-    write_basic_box_util(filename, game)
+    write_basic_box_util(filename, game, get_basic_box)
 
-def write_basic_box_util(filename, game):
+def write_basic_box_util(filename, game, grab):
     '''write_basic_box_util(filename, game)
         filename: name of the file to write to
         game: url extention. game == "/boxscores/202012230BOS.html"
@@ -128,7 +128,7 @@ def write_basic_box_util(filename, game):
         file.write(labels)
 
     #get the data for the game
-    data = get_basic_box(game)
+    data = grab(game)
 
     #append the rows
     for row in data:
@@ -142,6 +142,78 @@ def write_basic_box_util(filename, game):
 
     #close the file
     file.close()
+
+def write_basic_box_q1(game):
+    '''write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxq1.csv"'''
+
+    #filename
+    filename = 'basicboxq1.csv'
+
+    #write to the file
+    write_basic_box_util(filename, game, get_basic_box_q1)
+
+def write_basic_box_q2(game):
+    '''write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxq2.csv"'''
+
+    #filename
+    filename = 'basicboxq2.csv'
+
+    #write to the file
+    write_basic_box_util(filename, game, get_basic_box_q2)
+
+def write_basic_box_q3(game):
+    '''write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxq3.csv"'''
+
+    #filename
+    filename = 'basicboxq3.csv'
+
+    #write to the file
+    write_basic_box_util(filename, game, get_basic_box_q3)
+
+def write_basic_box_q4(game):
+    '''write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxq4.csv"'''
+
+    #filename
+    filename = 'basicboxq4.csv'
+
+    #write to the file
+    write_basic_box_util(filename, game, get_basic_box_q4)
+
+def write_basic_box_h1(game):
+    '''write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxh1.csv"'''
+
+    #filename
+    filename = 'basicboxh1.csv'
+
+    #write to the file
+    write_basic_box_util(filename, game, get_basic_box_h1)
+
+def write_basic_box_h2(game):
+    '''write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxh2.csv"'''
+
+    #filename
+    filename = 'basicboxh2.csv'
+
+    #write to the file
+    write_basic_box_util(filename, game, get_basic_box_h2)
 #########
 ##TESTS##
 #########
@@ -165,6 +237,72 @@ def test_clean_directory():
 #######################
 ##add new tests below##
 #######################
+def test_write_basic_box_q1():
+    #clear the file if it exists
+    if os.path.isfile(path + 'basicboxq1.csv'):
+        os.remove(path + 'basicboxq1.csv')
+
+    #write file then read it
+    write_basic_box_q1('/boxscores/202012230BOS.html')
+    table = pd.read_csv(path + 'basicboxq1.csv')
+
+    assert len(table['player']) == 19
+
+def test_write_basic_box_q2():
+    #clear the file if it exists
+    if os.path.isfile(path + 'basicboxq2.csv'):
+        os.remove(path + 'basicboxq2.csv')
+
+    #write file then read it
+    write_basic_box_q2('/boxscores/202012230BOS.html')
+    table = pd.read_csv(path + 'basicboxq2.csv')
+
+    assert len(table['player']) == 20
+
+def test_write_basic_box_q3():
+    #clear the file if it exists
+    if os.path.isfile(path + 'basicboxq3.csv'):
+        os.remove(path + 'basicboxq3.csv')
+
+    #write file then read it
+    write_basic_box_q3('/boxscores/202012230BOS.html')
+    table = pd.read_csv(path + 'basicboxq3.csv')
+
+    assert len(table['player']) == 18
+
+def test_write_basic_box_q4():
+    #clear the file if it exists
+    if os.path.isfile(path + 'basicboxq4.csv'):
+        os.remove(path + 'basicboxq4.csv')
+
+    #write file then read it
+    write_basic_box_q4('/boxscores/202012230BOS.html')
+    table = pd.read_csv(path + 'basicboxq4.csv')
+
+    assert len(table['player']) == 17
+
+def test_write_basic_box_h1():
+    #clear the file if it exists
+    if os.path.isfile(path + 'basicboxh1.csv'):
+        os.remove(path + 'basicboxh1.csv')
+
+    #write file then read it
+    write_basic_box_h1('/boxscores/202012230BOS.html')
+    table = pd.read_csv(path + 'basicboxh1.csv')
+
+    assert len(table['player']) == 20
+
+def test_write_basic_box_h2():
+    #clear the file if it exists
+    if os.path.isfile(path + 'basicboxh2.csv'):
+        os.remove(path + 'basicboxh2.csv')
+
+    #write file then read it
+    write_basic_box_h2('/boxscores/202012230BOS.html')
+    table = pd.read_csv(path + 'basicboxh2.csv')
+
+    assert len(table['player']) == 19
+
 def test_write_basic_box():
     #clear the file if it exists
     if os.path.isfile(path + 'basicbox.csv'):
