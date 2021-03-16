@@ -108,7 +108,16 @@ def write_basic_box(game):
     #filename
     filename = 'basicbox.csv'
 
-    #labels
+    #write to the file
+    write_basic_box_util(filename, game)
+
+def write_basic_box_util(filename, game):
+    '''write_basic_box_util(filename, game)
+        filename: name of the file to write to
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes box score stats of the given game to the file named filename'''
+
     labels = 'id,team,player,mp,fg,fga,fg%,3p,3pa,3p%,ft,fta,ft%,orb,drb,trb,ast,stl,blk,tov,pf,pts,+/-\n'
 
     #open the file
@@ -133,9 +142,6 @@ def write_basic_box(game):
 
     #close the file
     file.close()
-
-def write_basic_box_util(filename):
-    pass
 #########
 ##TESTS##
 #########
