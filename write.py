@@ -98,6 +98,44 @@ def write_four_factors(game):
 
     #close the file
     file.close()
+
+def write_basic_box(game):
+    '''write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicbox.csv"'''
+
+    #filename
+    filename = 'basicbox.csv'
+
+    #labels
+    labels = 'id,team,player,mp,fg,fga,fg%,3p,3pa,3p%,ft,fta,ft%,orb,drb,trb,ast,stl,blk,tov,pf,pts,+/-\n'
+
+    #open the file
+    file = open(path + filename, 'a+')
+
+    #add labels if the file is empty
+    if os.path.getsize(path + filename) == 0:
+        file.write(labels)
+
+    #get the data for the game
+    data = get_basic_box(game)
+
+    #append the rows
+    for row in data:
+        rs = '' #rowstring
+
+        if len(row) > 4:
+            for col in row:
+                rs = rs + col + ','
+
+            file.write(rs[0:len(rs) - 1] + '\n')
+
+    #close the file
+    file.close()
+
+def write_basic_box_util(filename):
+    pass
 #########
 ##TESTS##
 #########
@@ -121,6 +159,20 @@ def test_clean_directory():
 #######################
 ##add new tests below##
 #######################
+def test_write_basic_box():
+    #clear the file if it exists
+    if os.path.isfile(path + 'basicbox.csv'):
+        os.remove(path + 'basicbox.csv')
+
+    #write file then read it
+    write_basic_box('/boxscores/202012230BOS.html')
+    table = pd.read_csv(path + 'basicbox.csv')
+
+    assert len(table['player']) == 20
+    assert table['player'][0] == 'Jrue Holiday'
+    assert table['player'][10] == 'Marcus Smart'
+    assert table['mp'][2] == '36:24'
+
 def test_write_four_factors():
     #clear the file if it exists
     if os.path.isfile(path + 'fourfactors.csv'):
