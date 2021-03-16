@@ -115,6 +115,7 @@ def write_basic_box_util(filename, game, grab):
     '''write_basic_box_util(filename, game)
         filename: name of the file to write to
         game: url extention. game == "/boxscores/202012230BOS.html"
+        grab: function used to pull stats from the web
 
     side effect: writes box score stats of the given game to the file named filename'''
 
