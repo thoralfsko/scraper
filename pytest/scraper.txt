@@ -26,4 +26,4 @@ scraper.py::test_empty_get_line_score PASSED
 scraper.py::test_empty_get_game_links PASSED
 scraper.py::test_contents_get_game_links PASSED
 
-============================= 20 passed in 14.20s ==============================
+============================= 20 passed in 11.29s ==============================

@@ -1,0 +1,71 @@
+write_line_score(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes game line score data to "data/linescore.csv"
+
+########################################
+create_directory()
+
+    side effect: creates the data directory if it doesnt exist
+
+########################################
+clean_directory()
+
+    side effect: deletes the data directory and its contents and creates the data
+        directory again
+
+########################################
+write_four_factors(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes four factors data to "data/fourfactors.csv"
+
+########################################
+write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicbox.csv"
+
+########################################
+write_basic_box_util(filename, game)
+        filename: name of the file to write to
+        game: url extention. game == "/boxscores/202012230BOS.html"
+        grab: function used to pull stats from the web
+
+    side effect: writes box score stats of the given game to the file named filename
+
+########################################
+write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxq1.csv"
+
+########################################
+write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxq2.csv"
+
+########################################
+write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxq3.csv"
+
+########################################
+write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxq4.csv"
+
+########################################
+write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxh1.csv"
+
+########################################
+write_basic_box(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+
+    side effect: writes basic box stats to "data/basicboxh2.csv"
