@@ -243,6 +243,26 @@ def test_clean_directory():
 #######################
 ##add new tests below##
 #######################
+def test_write_line_score_ot():
+    if os.path.isfile(path + 'linescoreot.csv'):
+        os.remove(path + 'linescoreot.csv')
+
+    write_line_score_ot('/boxscores/202102210NOP.html')
+    table = pd.read_csv(path + 'linescoreot.csv')
+
+    assert table['ot'][0] == 7
+    assert table['ot'][1] == 12
+
+def test_write_line_score_2ot():
+    if os.path.isfile(path + 'linescore2ot.csv'):
+        os.remove(path + 'linescore2ot.csv')
+
+    write_line_score_ot('/boxscores/202101230PHO.html')
+    table = pd.read_csv(path + 'linescore2ot.csv')
+
+    assert table['2ot'][0] == 14
+    assert table['2ot'][1] == 6
+
 def test_write_basic_box_q1():
     #clear the file if it exists
     if os.path.isfile(path + 'basicboxq1.csv'):
