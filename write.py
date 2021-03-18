@@ -29,6 +29,11 @@ def write_line_score(game):
     #get the games line linescore
     data = get_line_score(game)
 
+    #check if the game went into overtime
+    if len(data[0]) > 7:
+        #Will implement in the future
+        return
+
     #append the rows
     for row in data:
         rs = '' #rowstring

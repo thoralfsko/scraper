@@ -37,4 +37,4 @@ write.py::test_write_basic_box PASSED
 write.py::test_write_four_factors PASSED
 write.py::test_write_line_score PASSED
 
-============================= 31 passed in 17.66s ==============================
+============================= 31 passed in 19.01s ==============================
