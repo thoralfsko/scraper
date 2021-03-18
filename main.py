@@ -9,8 +9,12 @@ teams = '''BOS MIL IND PHI BRK CLE ORL CHO ATL NYK MIA TOR
 links_processed = set()
 
 def main():
+    #clean the directory
+    clean_directory()
+
     #pull game data for every team
     for team in teams:
+
         #get game lins for team. only 2021 for now
         links = get_game_links(team, '2021')
 
