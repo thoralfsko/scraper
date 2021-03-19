@@ -251,7 +251,6 @@ def write_line_score_ot(data):
         filename = 'linescore' + str(ots) + 'ot.csv'
 
     #write to the file and close it
-    print(path + filename)
     file = open(path + filename, 'a+')
     if os.path.getsize(path + filename) == 0:
         file.write(labels)
