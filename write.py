@@ -31,7 +31,8 @@ def write_line_score(game):
 
     #check if the game went into overtime
     if len(data[0]) > 7:
-        write_line_score_ot(file, data)
+        file.close()
+        write_line_score_ot(data)
         return
 
     #append the rows
@@ -221,19 +222,48 @@ def write_basic_box_h2(game):
     #write to the file
     write_basic_box_util(filename, game, get_basic_box_h2)
 
-def write_line_score_ot(file, data):
+def write_line_score_ot(data):
     ''''''
 
     #find the number of ots
     ots = len(data[0]) - 7
 
     #create the labels string
+    labels = 'id,team,q1,q2,q3,q4,'
+    for i in range(ots):
+        if i == 0:
+            labels = labels + 'ot,'
+        else:
+            labels = labels + i + 'ot,'
+    labels = labels + 'total\n'
 
     #create the documents filename
+    filename = ''
+    if ots == 1:
+        filename = 'linescoreot.csv'
+    else:
+        filename = 'linescore' + str(ots) + '.csv'
 
     #write to the file and close it
+    print(path + filename)
+    print(labels)
+    print(ots)
+    file = open(path + filename, 'a+')
+    if os.path.getsize(path + filename) == 0:
+        file.write(labels)
+
+    for row in data:
+        rs = '' #rowstring
+        for col in row:
+            rs = rs + col + ','
+
+        file.write(rs[0:len(rs) - 1] + '\n')
+
+    #close the file
+    file.close()
 
     #return the number of ots ????????????????
+    return ots
 #########
 ##TESTS##
 #########
