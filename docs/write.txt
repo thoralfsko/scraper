@@ -2,6 +2,7 @@ write_line_score(game)
         game: url extention. game == "/boxscores/202012230BOS.html"
 
     side effect: writes game line score data to "data/linescore.csv"
+    returns: the number of overtime periods played
 
 ########################################
 create_directory()
@@ -69,3 +70,10 @@ write_basic_box(game)
         game: url extention. game == "/boxscores/202012230BOS.html"
 
     side effect: writes basic box stats to "data/basicboxh2.csv"
+
+########################################
+write_line_score_ot(data)
+        data: linescores for the two teams => [[id, team, q1, q2, q3, q4, total], [id, team, q1, q2, q3, q4, total]]
+
+    side effect: writes line scores to linescore<x>ot.csv where x is the number of overtime periods if x > 1 or "" when x == 1
+    returns: number of overtime periods played

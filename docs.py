@@ -24,7 +24,8 @@ file.close()
 #create a list of methods from write.py
 methods = [write_line_score, create_directory, clean_directory, write_four_factors,
     write_basic_box, write_basic_box_util, write_basic_box_q1, write_basic_box_q2,
-    write_basic_box_q3, write_basic_box_q4, write_basic_box_h1, write_basic_box_h2]
+    write_basic_box_q3, write_basic_box_q4, write_basic_box_h1, write_basic_box_h2,
+    write_line_score_ot]
 
 #create write docs
 file = open('docs/write.txt', 'w+')

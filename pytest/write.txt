@@ -3,7 +3,7 @@ platform linux -- Python 3.8.5, pytest-6.2.2, py-1.10.0, pluggy-0.13.1 -- /usr/b
 cachedir: .pytest_cache
 rootdir: /home/tim/Documents/scraper
 plugins: anyio-2.0.2
-collecting ... collected 31 items
+collecting ... collected 33 items
 
 write.py::test_contents_get_basic_box_h2 <- scraper.py PASSED
 write.py::test_empty_get_basic_box_h2 <- scraper.py PASSED
@@ -27,6 +27,10 @@ write.py::test_empty_get_game_links <- scraper.py PASSED
 write.py::test_contents_get_game_links <- scraper.py PASSED
 write.py::test_create_directory PASSED
 write.py::test_clean_directory PASSED
+write.py::test_write_line_score_ot data/linescoreot.csv
+PASSED
+write.py::test_write_line_score_2ot data/linescore2ot.csv
+PASSED
 write.py::test_write_basic_box_q1 PASSED
 write.py::test_write_basic_box_q2 PASSED
 write.py::test_write_basic_box_q3 PASSED
@@ -37,4 +41,4 @@ write.py::test_write_basic_box PASSED
 write.py::test_write_four_factors PASSED
 write.py::test_write_line_score PASSED
 
-============================= 31 passed in 19.01s ==============================
+============================= 33 passed in 19.24s ==============================

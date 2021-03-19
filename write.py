@@ -11,7 +11,8 @@ def write_line_score(game):
     '''write_line_score(game)
         game: url extention. game == "/boxscores/202012230BOS.html"
 
-    side effect: writes game line score data to "data/linescore.csv"'''
+    side effect: writes game line score data to "data/linescore.csv"
+    returns: the number of overtime periods played'''
 
     #filename
     filename = 'linescore.csv'
@@ -32,8 +33,8 @@ def write_line_score(game):
     #check if the game went into overtime
     if len(data[0]) > 7:
         file.close()
-        write_line_score_ot(data)
-        return
+        return write_line_score_ot(data)
+
 
     #append the rows
     for row in data:
@@ -45,6 +46,7 @@ def write_line_score(game):
 
     #close the file
     file.close()
+    return 0
 
 def create_directory():
     '''create_directory()
@@ -223,7 +225,11 @@ def write_basic_box_h2(game):
     write_basic_box_util(filename, game, get_basic_box_h2)
 
 def write_line_score_ot(data):
-    ''''''
+    '''write_line_score_ot(data)
+        data: linescores for the two teams => [[id, team, q1, q2, q3, q4, total], [id, team, q1, q2, q3, q4, total]]
+
+    side effect: writes line scores to linescore<x>ot.csv where x is the number of overtime periods if x > 1 or "" when x == 1
+    returns: number of overtime periods played'''
 
     #find the number of ots
     ots = len(data[0]) - 7
@@ -234,7 +240,7 @@ def write_line_score_ot(data):
         if i == 0:
             labels = labels + 'ot,'
         else:
-            labels = labels + str(i) + 'ot,'
+            labels = labels + str(i + 1) + 'ot,'
     labels = labels + 'total\n'
 
     #create the documents filename
@@ -242,10 +248,10 @@ def write_line_score_ot(data):
     if ots == 1:
         filename = 'linescoreot.csv'
     else:
-        filename = 'linescore' + str(ots) + '.csv'
+        filename = 'linescore' + str(ots) + 'ot.csv'
 
     #write to the file and close it
-    #print(path + filename)
+    print(path + filename)
     file = open(path + filename, 'a+')
     if os.path.getsize(path + filename) == 0:
         file.write(labels)
@@ -289,21 +295,23 @@ def test_write_line_score_ot():
     if os.path.isfile(path + 'linescoreot.csv'):
         os.remove(path + 'linescoreot.csv')
 
-    write_line_score('/boxscores/202102210NOP.html')
+    ots = write_line_score('/boxscores/202102210NOP.html')
     table = pd.read_csv(path + 'linescoreot.csv')
 
     assert table['ot'][0] == 7
     assert table['ot'][1] == 12
+    assert ots == 1
 
 def test_write_line_score_2ot():
     if os.path.isfile(path + 'linescore2ot.csv'):
         os.remove(path + 'linescore2ot.csv')
 
-    write_line_score('/boxscores/202101230PHO.html')
+    ots = write_line_score('/boxscores/202101230PHO.html')
     table = pd.read_csv(path + 'linescore2ot.csv')
 
     assert table['2ot'][0] == 14
     assert table['2ot'][1] == 6
+    assert ots == 2
 
 def test_write_basic_box_q1():
     #clear the file if it exists
@@ -406,10 +414,11 @@ def test_write_line_score():
         os.remove(path + 'linescore.csv')
 
     #write to the file then read it
-    write_line_score('/boxscores/202012230BOS.html')
+    ots = write_line_score('/boxscores/202012230BOS.html')
     table = pd.read_csv(path + 'linescore.csv')
     #print(table['id'])
 
     assert table['id'][0] == '202012230BOS'
     assert table['team'][0] == 'MIL'
     assert table['team'][1] == 'BOS'
+    assert ots == 0
