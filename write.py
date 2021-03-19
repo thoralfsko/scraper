@@ -31,7 +31,7 @@ def write_line_score(game):
 
     #check if the game went into overtime
     if len(data[0]) > 7:
-        #Will implement in the future
+        write_line_score_ot(file, data)
         return
 
     #append the rows
@@ -220,6 +220,20 @@ def write_basic_box_h2(game):
 
     #write to the file
     write_basic_box_util(filename, game, get_basic_box_h2)
+
+def write_line_score_ot(file, data):
+    ''''''
+
+    #find the number of ots
+    ots = len(data[0]) - 7
+
+    #create the labels string
+
+    #create the documents filename
+
+    #write to the file and close it
+
+    #return the number of ots ????????????????
 #########
 ##TESTS##
 #########
