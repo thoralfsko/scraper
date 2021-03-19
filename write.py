@@ -234,7 +234,7 @@ def write_line_score_ot(data):
         if i == 0:
             labels = labels + 'ot,'
         else:
-            labels = labels + i + 'ot,'
+            labels = labels + str(i) + 'ot,'
     labels = labels + 'total\n'
 
     #create the documents filename
@@ -245,9 +245,7 @@ def write_line_score_ot(data):
         filename = 'linescore' + str(ots) + '.csv'
 
     #write to the file and close it
-    print(path + filename)
-    print(labels)
-    print(ots)
+    #print(path + filename)
     file = open(path + filename, 'a+')
     if os.path.getsize(path + filename) == 0:
         file.write(labels)
@@ -291,7 +289,7 @@ def test_write_line_score_ot():
     if os.path.isfile(path + 'linescoreot.csv'):
         os.remove(path + 'linescoreot.csv')
 
-    write_line_score_ot('/boxscores/202102210NOP.html')
+    write_line_score('/boxscores/202102210NOP.html')
     table = pd.read_csv(path + 'linescoreot.csv')
 
     assert table['ot'][0] == 7
@@ -301,7 +299,7 @@ def test_write_line_score_2ot():
     if os.path.isfile(path + 'linescore2ot.csv'):
         os.remove(path + 'linescore2ot.csv')
 
-    write_line_score_ot('/boxscores/202101230PHO.html')
+    write_line_score('/boxscores/202101230PHO.html')
     table = pd.read_csv(path + 'linescore2ot.csv')
 
     assert table['2ot'][0] == 14
