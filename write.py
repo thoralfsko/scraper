@@ -267,6 +267,11 @@ def write_line_score_ot(data):
 
     #return the number of ots ????????????????
     return ots
+
+def write_basic_box_ot(game, ot):
+    ''''''
+
+    pass
 #########
 ##TESTS##
 #########

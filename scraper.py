@@ -350,9 +350,37 @@ def get_basic_box_h2(game):
     #print(get_basic_table(page, gid, ids, teams))
 
     return get_basic_table(page, gid, ids, teams)
+
+def get_basic_box_ot(game, ot):
+    '''get_basic_box_ot(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+        ot: the number ot period you want to scrape
+
+    returns: list of basic box score rows for h2 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]'''
+
+    #create the url
+    url = 'https://www.basketball-reference.com' + game
+    #make request
+    page = requests.get(url)
+
+    #get the gid and teams
+    gid, teams = get_team_info(game, page)
+
+    #create ids for searching the page
+    ids = ['box-' + team + '-ot'+ str(ot) + '-basic' for team in teams]
+    #print(get_basic_table(page, gid, ids, teams))
+
+    return get_basic_table(page, gid, ids, teams)
 #########
 ##TESTS##
 #########
+def test_get_basic_box_ot():
+    results = get_basic_box_ot('/boxscores/202101230PHO.html', 1)
+    assert results[0][4] == '0'
+
+    results = get_basic_box_ot('/boxscores/202101230PHO.html', 2)
+    assert results[0][4] == '1'
+
 def test_contents_get_basic_box_h2():
     #get the results
     results = get_basic_box_h2('/boxscores/202012230BOS.html')

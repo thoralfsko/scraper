@@ -10,7 +10,8 @@ if os.path.isdir('docs/') == False:
 #create a list of methods in scraper.py
 methods = [get_game_links, get_line_score, get_four_factors, get_basic_box,
     get_team_info, get_basic_table, get_basic_box_q1, get_basic_box_q2,
-    get_basic_box_q3, get_basic_box_q4, get_basic_box_h1, get_basic_box_h2]
+    get_basic_box_q3, get_basic_box_q4, get_basic_box_h1, get_basic_box_h2,
+    get_basic_box_ot]
 
 #create scraper docs
 file = open('docs/scraper.txt', 'w+')
