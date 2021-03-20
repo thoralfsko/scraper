@@ -23,7 +23,27 @@ def main():
             #check if link has been processed
             if link not in links_processed:
                 #write linescore
-                write_line_score(link)
+                #get number of ot periods
+                ots = write_line_score(link)
+
+                #write fourfactors
+                write_four_factors(link)
+
+                #write basic box boxscore
+                write_basic_box(link)
+
+                #write bosxcore quarters
+                write_basic_box_q1(link)
+                write_basic_box_q2(link)
+                write_basic_box_q3(link)
+                write_basic_box_q4(link)
+
+                #write box score halfs
+                write_basic_box_h1(link)
+                write_basic_box_h2(link)
+
+                #handle writing overtime if there was one
+                #do later
 
                 #add link to proccessed set
                 links_processed.add(link)
