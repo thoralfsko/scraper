@@ -43,7 +43,8 @@ def main():
                 write_basic_box_h2(link)
 
                 #handle writing overtime if there was one
-                #do later
+                for ot in range(ots):
+                    write_basic_box_ot(link, ot + 1)
 
                 #add link to proccessed set
                 links_processed.add(link)

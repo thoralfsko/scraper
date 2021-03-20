@@ -73,3 +73,10 @@ get_basic_box_h2(game)
         game: url extention. game == "/boxscores/202012230BOS.html"
 
     returns: list of basic box score rows for h2 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]
+
+########################################
+get_basic_box_ot(game)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+        ot: the number ot period you want to scrape
+
+    returns: list of basic box score rows for h2 => [[id, team, player, mp, fg, fga, fg%, 3p, 3pa, 3p%, ft, fta, ft%, orb, drb, trb, ast, stl, blk, tov, pf, pts, +/-], ...]

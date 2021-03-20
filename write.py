@@ -269,9 +269,43 @@ def write_line_score_ot(data):
     return ots
 
 def write_basic_box_ot(game, ot):
-    ''''''
+    '''write_basic_box_ot(game, ot)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+        ot: the ot period you would like to write
 
-    pass
+    side effect: writes the ot box score to "basicboxot.csv" or "basicbox<ot>ot.csv"'''
+
+    labels = 'id,team,player,mp,fg,fga,fg%,3p,3pa,3p%,ft,fta,ft%,orb,drb,trb,ast,stl,blk,tov,pf,pts,+/-\n'
+
+    #create filename
+    filename = ''
+    if ot < 2:
+        filename = 'basicboxot.csv'
+    else:
+        filename = 'basicbox' + str(ot) + 'ot.csv'
+
+    #open the file
+    file = open(path + filename, 'a+')
+
+    #add labels if the file is empty
+    if os.path.getsize(path + filename) == 0:
+        file.write(labels)
+
+    #get the data for the game
+    data = get_basic_box_ot(game, ot)
+
+    #append the rows
+    for row in data:
+        rs = '' #rowstring
+
+        if len(row) > 4:
+            for col in row:
+                rs = rs + col + ','
+
+            file.write(rs[0:len(rs) - 1] + '\n')
+
+    #close the file
+    file.close()
 #########
 ##TESTS##
 #########
@@ -295,6 +329,21 @@ def test_clean_directory():
 #######################
 ##add new tests below##
 #######################
+def test_write_basic_box_ot():
+    if os.path.isfile(path + 'basicboxot.csv'):
+        os.remove(path + 'basicboxot.csv')
+
+    write_basic_box_ot('/boxscores/202101230PHO.html', 1)
+    table = pd.read_csv(path + 'basicboxot.csv')
+    assert table['fg'][0] == 0
+
+    if os.path.isfile(path + 'basicbox2ot.csv'):
+        os.remove(path + 'basicbox2ot.csv')
+
+    write_basic_box_ot('/boxscores/202101230PHO.html', 2)
+    table = pd.read_csv(path + 'basicbox2ot.csv')
+    assert table['fg'][0] == 1
+
 def test_write_line_score_ot():
     if os.path.isfile(path + 'linescoreot.csv'):
         os.remove(path + 'linescoreot.csv')

@@ -77,3 +77,10 @@ write_line_score_ot(data)
 
     side effect: writes line scores to linescore<x>ot.csv where x is the number of overtime periods if x > 1 or "" when x == 1
     returns: number of overtime periods played
+
+########################################
+write_basic_box_ot(game, ot)
+        game: url extention. game == "/boxscores/202012230BOS.html"
+        ot: the ot period you would like to write
+
+    side effect: writes the ot box score to "basicboxot.csv" or "basicbox<ot>ot.csv"
